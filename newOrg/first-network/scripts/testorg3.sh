@@ -11,12 +11,12 @@
 # properly added to the network previously setup in the BYFN tutorial.
 #
 
-echo
-echo " ____    _____      _      ____    _____ "
-echo "/ ___|  |_   _|    / \    |  _ \  |_   _|"
-echo "\___ \    | |     / _ \   | |_) |   | |  "
-echo " ___) |   | |    / ___ \  |  _ <    | |  "
-echo "|____/    |_|   /_/   \_\ |_| \_\   |_|  "
+# echo
+# echo " ____    _____      _      ____    _____ "
+# echo "/ ___|  |_   _|    / \    |  _ \  |_   _|"
+# echo "\___ \    | |     / _ \   | |_) |   | |  "
+# echo " ___) |   | |    / ___ \  |  _ <    | |  "
+# echo "|____/    |_|   /_/   \_\ |_| \_\   |_|  "
 echo
 echo "Extend your first network (EYFN) test"
 echo
@@ -47,15 +47,7 @@ chaincodeInvoke 0 3
 chaincodeQuery 0 3 80
 
 echo
-echo "========= All GOOD, EYFN test execution completed =========== "
-echo
-
-echo
-echo " _____   _   _   ____   "
-echo "| ____| | \ | | |  _ \  "
-echo "|  _|   |  \| | | | | | "
-echo "| |___  | |\  | | |_| | "
-echo "|_____| |_| \_| |____/  "
-echo
+echo "========= All GOOD, EYFN execution completed =========== "
+echo "===== END"
 
 exit 0
