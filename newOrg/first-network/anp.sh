@@ -14,6 +14,7 @@ while getopts "h?m:c:t:d:f:s:l:i:" opt; do
     h|\?)
       printHelp
       exit 0
+    ;;
     i)  IMAGETAG=`uname -m`"-"$OPTARG
     ;;
   esac
