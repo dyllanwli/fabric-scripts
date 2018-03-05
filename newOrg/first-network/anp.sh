@@ -31,6 +31,10 @@ IMAGE_TAG=$IMAGE_TAG docker-compose -f docker-compose-new-peer.yaml up -d
 echo "===> checking whether the peer has been launched"
 docker ps 
 
+echo "==> chmod those script incase get permission denied"
+chmod +x ./scripts/new-peer-join.sh
+chmod +x ./scripts/new-peer-chaincode.sh
+
 echo "===> Joinning mychannel"
 docker exec -it cli ./scripts/new-peer-join.sh
 
