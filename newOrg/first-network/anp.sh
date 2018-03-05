@@ -20,6 +20,9 @@ while getopts "h?m:c:t:d:f:s:l:i:" opt; do
   esac
 done
 
+echo "=====> generate config file"
+cryptogen extend --config=./crypto-config-new-peer.yaml
+
 
 echo "=====> Spawning new peer using $IMAGE_TAG"
 IMAGE_TAG=$IMAGE_TAG docker-compose -f docker-compose-new-peer.yaml up -d
