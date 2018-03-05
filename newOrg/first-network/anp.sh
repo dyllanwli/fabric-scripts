@@ -20,7 +20,7 @@ while getopts "h?m:c:t:d:f:s:l:i:" opt; do
 done
 
 
-echo "=====> Spawning new peer using x86_64-1.1.0-rc1"
+echo "=====> Spawning new peer using $IMAGE_TAG"
 IMAGE_TAG=$IMAGETAG docker-compose -f docker-compose-new-peer.yaml up -d
 
 echo "===> checking whether the peer has been launched"
