@@ -17,7 +17,8 @@ function golang() {
         goTar=$(docker version | grep -m1 go| awk '{print($3)}').linux-amd64.tar.gz
         echo ... to use docker inline go version :[${goTar}]
     fi
-	wget https://redirector.gvt1.com/edgedl/go/${goTar}
+	wget https://dl.google.com/go/${goTar}
+	# wget https://redirector.gvt1.com/edgedl/go/${goTar}
 	sudo tar -C /usr/local -xzf ${goTar}
 	# write path to 'go' command
 	if ! grep "/usr/local/go/bin" $systemProfile; then
