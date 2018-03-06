@@ -54,5 +54,5 @@ if [ -n "$fcn" ]; then
 	$fcn
 	nodejs
 else
-	"Nothing to do. end. "
+	echo "Nothing to do. "
 fi
