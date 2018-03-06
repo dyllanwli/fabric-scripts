@@ -33,7 +33,7 @@ fcn=$1
 yum install git lsof jq tree curl -y
 
 function cn() {
-	./common/install.sh cn
+	sudo ./common/install.sh cn
 	sudo apt -qq install -y moreutils
 	npm install
 }
