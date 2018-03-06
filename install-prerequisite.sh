@@ -30,7 +30,7 @@ CURRENT=pwd
 fcn=$1
 
 # install some toolkit
-yum install git lsof jq tree curl
+yum install git lsof jq tree curl -y
 
 function cn() {
 	if [ ! -f "$CURRENT/common/install.sh" ]; then
