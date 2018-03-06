@@ -8,3 +8,4 @@ for IMAGES in couchdb kafka zookeeper peer orderer ccenv javaenv tools; do
 done
 
 echo "DONE."
+docker images | grep hyperledger*
