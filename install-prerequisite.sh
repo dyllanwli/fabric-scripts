@@ -41,10 +41,10 @@ yum install git lsof jq tree curl -y
 if [ -n "$fcn" ]; then
 	$fcn
 else
-	sudo $PWD/common/install.sh
+	sudo bash $PWD/common/install.sh
 	# write to config: jq do not support in-place editing, use moreutils:sponge
 	yum -qq install -y moreutils
 	if ! go version; then
-		sudo $PWD/common/install.sh golang
+		sudo bash $PWD/common/install.sh golang
 	fi
 fi
