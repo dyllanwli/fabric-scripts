@@ -7,7 +7,7 @@ fcn=$1
 systemProfile="/etc/profile"
 
 function golang() {
-    goTar=go1.9.2.linux-amd64.tar.gz
+    goTar=go1.9.3.linux-amd64.tar.gz
     if go version >/dev/null;then
         echo ... to overwrite exiting golang at GOROOT: $(go env GOROOT)
         sudo rm -rf $(go env GOROOT)
@@ -31,13 +31,13 @@ function golang() {
 	# delete install pack
 	rm -f ${goTar}
 }
-function golang-uninstall() {
+# function golang-uninstall() {
 	# TODO  To remove an existing Go installation from your system delete the go directory. 
     # This is usually /usr/local/go under Linux, Mac OS X, and FreeBSD
 	# You should also remove the Go bin directory from your PATH environment variable. 
     # Under Linux and FreeBSD you should edit /etc/profile or $HOME/.profile. 
     # If you installed Go with the Mac OS X package then you should remove the /etc/paths.d/go file. 
-}
+# }
 
 
 function nodejs(){
