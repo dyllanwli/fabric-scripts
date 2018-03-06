@@ -13,4 +13,4 @@ CORE_PEER_ID=cli
 CORE_LOGGING_LEVEL=INFO
 CORE_PEER_ADDRESS=peer2.org2.example.com:7051
 
-peer chaincode install -n mycc -v 2.0 -l golang -p github.com/chaincode/chaincode_example02/go/
+peer chaincode install -n mycc -v 3.0 -l golang -p github.com/chaincode/chaincode_example02/go/
