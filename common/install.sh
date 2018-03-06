@@ -5,11 +5,6 @@ CURRENT="$(dirname $(readlink -f ${BASH_SOURCE}))"
 fcn=$1
 
 systemProfile="/etc/profile"
-remain_params=""
-for ((i = 2; i <= ${#}; i++)); do
-	j=${!i}
-	remain_params="$remain_params $j"
-done
 
 function golang() {
     goTar=go1.9.2.linux-amd64.tar.gz
@@ -50,15 +45,10 @@ function nodejs(){
 	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 
 	echo "===== Add those below to you ~/.bashrc. then run source ===== "
-	echo "
-	export NVM_DIR="$HOME/.nvm"
-	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-	"
+	echo " "
+	echo "export NVM_DIR=\"\$HOME/.nvm"
+	echo " [ -s \"\$NVM_DIR/nvm.sh\" ] && \. \"\$NVM_DIR/nvm.sh\" # This loads nvm"
 	command -v nvm
-}
-
-function govendor(){
-    go get -u github.com/kardianos/govendor
 }
 if [ -n "$fcn" ]; then
 	$fcn
