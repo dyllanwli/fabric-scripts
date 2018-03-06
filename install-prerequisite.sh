@@ -32,19 +32,19 @@ fcn=$1
 # install some toolkit
 yum install git lsof jq tree curl -y
 
-function cn() {
-	sudo ./common/install.sh cn
-	sudo apt -qq install -y moreutils
-	npm install
-}
+# function cn() {
+# 	sudo ./common/install.sh cn
+# 	sudo yum -qq install -y moreutils
+# 	npm install
+# }
 
 if [ -n "$fcn" ]; then
 	$fcn
 else
-	./common/install.sh
+	$PWD/common/install.sh
 	# write to config: jq do not support in-place editing, use moreutils:sponge
 	yum -qq install -y moreutils
 	if ! go version; then
-		./common/install.sh golang
+		$PWD/common/install.sh golang
 	fi
 fi
