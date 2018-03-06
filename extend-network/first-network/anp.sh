@@ -47,7 +47,7 @@ docker exec -it cli ./scripts/new-peer-2.sh
 sleep 3
 
 echo "===> Instantiating chaincode needs run manually"
-echo "docker exec -it cli ./scripts/new-peer-3.sh"
+docker exec -it cli ./scripts/new-peer-3.sh
 
 echo "===> If no error, show chaincode result below."
 docker logs dev-peer2.org2.example.com-mycc-3.0
