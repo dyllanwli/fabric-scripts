@@ -37,16 +37,19 @@ npm install fabric-ca-client@1.0.2
 # use fabric v1.0.6
 echo "use fabric v1.0.6..."
 cd $GOPATH/src/github.com/hyperledger/fabric-test/fabric/
+git pull
 git checkout v1.0.6
 
 # use fabric-ca v1.0.6
 echo "use fabric-ca v1.0.6..."
 cd $GOPATH/src/github.com/hyperledger/fabric-test/fabric/
+git pull
 git checkout v1.0.6
 
 # use fabric-sdk-node v1.0.4
 echo "use fabric-sdk-node v1.0.4..."
 cd $GOPATH/src/github.com/hyperledger/fabric-test/fabric-sdk-node/
+git pull
 git checkout v1.0.4
 npm install --registry=https://registry.npm.taobao.org
 gulp ca
