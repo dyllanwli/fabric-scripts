@@ -2,6 +2,7 @@
 #
 #
 # Use to install prerequisite
+
 nvm install 6.10.0
 nvm alias default 6.10.0
 node --version
@@ -12,7 +13,7 @@ yum install -y build-essential python libltdl-dev
 # install build essential
 yum install gcc-c++ make -y
 rm -rf $HOME/.node-gyp
-
+source ~/.profile
 
 go get -d -v github.com/hyperledger/fabric-test
 cd $GOPATH/src/github.com/hyperledger/fabric-test
