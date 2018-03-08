@@ -21,7 +21,6 @@ cd $GOPATH/src/github.com/hyperledger/fabric-test
 # if Run this scripts first time
 git submodule update --init --recursive
 git submodule foreach git pull origin master
-
 # else 
 # git submodule foreach git pull origin master
 
