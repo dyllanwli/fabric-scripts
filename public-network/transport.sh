@@ -1,10 +1,17 @@
 #!/bin/bash
 # transport to another machine
 
+# Print the usage message
+function printHelp () {
+  echo "Usage: Please input -p"
+}
 
-
-while getopts "p:" opt; do
+while getopts "h?m:p:" opt; do
   case "$opt" in
+    h|\?)
+      printHelp
+      exit 0
+    ;;
     p)  IP=$OPTARG
     ;;
   esac
