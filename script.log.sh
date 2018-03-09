@@ -12,7 +12,7 @@ cd $GOPATH/src/github.com/hyperledger/
 git clone https://github.com/hyperledger/fabric-samples.git
 cd $GOPATH/src/github.com/hyperledger/fabric-samples/first-network
 git checkout v1.0.6
-bash byfn.sh -m up -i 1.0.6 -y
+bash byfn.sh -m up -i 1.0.6
 bash byfn.sh -m down
 
 

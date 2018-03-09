@@ -19,4 +19,5 @@ done
 
 cd ./first-network
 bash ./byfn.sh -m generate -i 1.0.6
+echo "sending file to ${IP}..."
 scp -r first-network root@${IP}:~/diya/fabric-scripts/public-network
