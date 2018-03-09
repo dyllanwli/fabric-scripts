@@ -8,6 +8,9 @@ version: '2'
 networks:
   byfn:
 
+env_file:
+  - .env
+  
 services:
   couchdb0:
     container_name: couchdb0

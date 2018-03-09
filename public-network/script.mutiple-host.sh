@@ -22,7 +22,7 @@ docker network create --attachable --driver overlay my-net
 ./bmhn.sh
 
 ### PC1 =======
-# 1. Bring up the network PC1 
+# 1. Bring up the network PC1  ca
 echo "spawn up CA SERVER"
 # peer0orgca=9696bdf08309c9048d17e8c9386dee8f027f73c3044c8df9ff6e7befde0e6439_sk
 docker run --rm -it -d --network="my-net" --name ca.example.com -p 7054:7054 -e FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server -e FABRIC_CA_SERVER_CA_NAME=ca.example.com -e FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem -e FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/9696bdf08309c9048d17e8c9386dee8f027f73c3044c8df9ff6e7befde0e6439_sk -v $(pwd)/crypto-config/peerOrganizations/org1.example.com/ca/:/etc/hyperledger/fabric-ca-server-config -e CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=hyp-net hyperledger/fabric-ca:x86_64-1.0.6 sh -c 'fabric-ca-server start -b admin:adminpw -d'
