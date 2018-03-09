@@ -52,3 +52,4 @@ git pull
 git checkout v1.0.4
 npm install --registry=https://registry.npm.taobao.org
 gulp ca
+
