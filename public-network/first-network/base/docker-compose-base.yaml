@@ -70,7 +70,6 @@ services:
         - ../crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/msp:/etc/hyperledger/fabric/msp
         - ../crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls:/etc/hyperledger/fabric/tls
         - peer1.org1.example.com:/var/hyperledger/production
-
     ports:
       - 8051:7051
       - 8053:7053
