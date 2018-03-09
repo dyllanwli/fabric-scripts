@@ -5,9 +5,6 @@
 
 version: '2'
 
-env_file:
-  - .env
-
 volumes:
   orderer.example.com:
   peer0.org1.example.com:
@@ -21,6 +18,7 @@ services:
   ca0:
     image: hyperledger/fabric-ca:$IMAGE_TAG
     environment:
+      - GODEBUG=netdns=go
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca-org1
       - FABRIC_CA_SERVER_TLS_ENABLED=true
@@ -38,6 +36,7 @@ services:
   ca1:
     image: hyperledger/fabric-ca:$IMAGE_TAG
     environment:
+      - GODEBUG=netdns=go
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca-org2
       - FABRIC_CA_SERVER_TLS_ENABLED=true
