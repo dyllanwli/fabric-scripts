@@ -33,8 +33,8 @@ services:
       file:  base/docker-compose-base.yaml
       service: peer1.org1.example.com
     extra_hosts:
-      - "peer0.org1.example.com:172.18.215.249"
       - "orderer.example.com:172.18.244.211"
+      - "peer0.org1.example.com:172.18.215.249"
     # networks:
     #   - byfn
 
@@ -54,8 +54,8 @@ services:
       file:  base/docker-compose-base.yaml
       service: peer1.org2.example.com
     extra_hosts:
-      - "peer0.org1.example.com:172.18.215.249"
       - "orderer.example.com:172.18.244.211"
+      - "peer0.org2.example.com:172.18.215.249"
     # networks:
     #   - byfn
 
