@@ -5,7 +5,7 @@
 
 
 echo "docker swarm must select a specify netowrk mode, LAN or WAN with specify ip address"
-docker swarm init --advertise-addr 39.108.167.205:2378
+docker swarm init --advertise-addr 
 docker swarm init --advertise-addr 172.16.50.152:2378
 docker swarm join-token manager
 
@@ -98,15 +98,15 @@ peer chaincode query -C mychannel -n mycc -c '{"Args":["query","a"]}'
 docker rm -f $(docker ps -aq)
 
 # install openvswitch
-cd ~
-yum -y install make gcc openssl-devel autoconf automake rpm-build redhat-rpm-config python-devel openssl-devel kernel-devel kernel-debug-devel libtool wget selinux-policy-devel python-sphinx python-six
-mkdir -p ~/rpmbuild/SOURCES
-wget http://openvswitch.org/releases/openvswitch-2.9.0.tar.gz
-cp openvswitch-2.9.0.tar.gz ~/rpmbuild/SOURCES/
-tar xfz openvswitch-2.9.0.tar.gz
-sed 's/openvswitch-kmod, //g' openvswitch-2.9.0/rhel/openvswitch.spec > openvswitch-2.9.0/rhel/openvswitch_no_kmod.spec
-rpmbuild -bb --nocheck ~/openvswitch-2.9.0/rhel/openvswitch_no_kmod.spec
-ls -l ~/rpmbuild/RPMS/x86_64/
-yum localinstall -y ~/rpmbuild/RPMS/x86_64/openvswitch-2.9.0-1.x86_64.rpm
-systemctl start openvswitch.service
-chkconfig openvswitch on
+# cd ~
+# yum -y install make gcc openssl-devel autoconf automake rpm-build redhat-rpm-config python-devel openssl-devel kernel-devel kernel-debug-devel libtool wget selinux-policy-devel python-sphinx python-six
+# mkdir -p ~/rpmbuild/SOURCES
+# wget http://openvswitch.org/releases/openvswitch-2.9.0.tar.gz
+# cp openvswitch-2.9.0.tar.gz ~/rpmbuild/SOURCES/
+# tar xfz openvswitch-2.9.0.tar.gz
+# sed 's/openvswitch-kmod, //g' openvswitch-2.9.0/rhel/openvswitch.spec > openvswitch-2.9.0/rhel/openvswitch_no_kmod.spec
+# rpmbuild -bb --nocheck ~/openvswitch-2.9.0/rhel/openvswitch_no_kmod.spec
+# ls -l ~/rpmbuild/RPMS/x86_64/
+# yum localinstall -y ~/rpmbuild/RPMS/x86_64/openvswitch-2.9.0-1.x86_64.rpm
+# systemctl start openvswitch.service
+# chkconfig openvswitch on
