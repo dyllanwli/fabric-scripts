@@ -9,12 +9,12 @@ if [[ -d $GOPATH ]];then
     fi
   else
     if [ ! `command -v go` ]; then        
-      apt install golang-go -y
+      yum install golang-go -y
     fi  
-    apt install libtool libltdl-dev -y
+    yum install libtool libltdl-dev -y
   fi  
 
-  apt install libtool libltdl-dev
+  yum install libtool libltdl-dev
   mkdir -p /opt/gopath/src
   export GOPATH=/opt/gopath
   cd $GOPATH/src
