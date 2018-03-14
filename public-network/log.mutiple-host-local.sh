@@ -1,12 +1,13 @@
 #!/bin/bash
 
 
-# use to test docker swarm on mutiple host network
+# use to test docker swarm on mutiple host network on local network
 
 
 echo "docker swarm must select a specify netowrk mode, LAN or WAN with specify ip address"
 docker swarm init --advertise-addr 
-docker swarm init --advertise-addr 172.16.50.152:2378
+# should not use docker --advertise address unless you use docker serivce to connect container
+docker swarm init 
 docker swarm join-token manager
 
 yum install yum-utils.noarch
