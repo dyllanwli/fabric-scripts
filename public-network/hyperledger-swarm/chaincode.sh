@@ -18,7 +18,7 @@ services:
         condition: on-failure
         delay: 5s
         max_attempts: 3
-    image: hyperledger/fabric-ccenv:x86_64-1.0.2
+    image: hyperledger/fabric-ccenv:x86_64-1.0.6
     networks:
       hyperledger-ov:
         aliases:

@@ -12,7 +12,7 @@ services:
         delay: 5s
         max_attempts: 3
     hostname: orderer0.qsoft.com
-    image: hyperledger/fabric-orderer:x86_64-1.0.2
+    image: hyperledger/fabric-orderer:x86_64-1.0.6
     networks:
       hyperledger-ov:
         aliases:
@@ -46,7 +46,7 @@ services:
         delay: 5s
         max_attempts: 3
     hostname: orderer1.qsoft.com
-    image: hyperledger/fabric-orderer:x86_64-1.0.2
+    image: hyperledger/fabric-orderer:x86_64-1.0.6
     networks:
       hyperledger-ov:
         aliases:
@@ -80,7 +80,7 @@ services:
         delay: 5s
         max_attempts: 3
     hostname: orderer2.qsoft.com
-    image: hyperledger/fabric-orderer:x86_64-1.0.2
+    image: hyperledger/fabric-orderer:x86_64-1.0.6
     networks:
       hyperledger-ov:
         aliases:

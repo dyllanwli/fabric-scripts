@@ -12,7 +12,7 @@ services:
         delay: 5s
         max_attempts: 3
     hostname: zookeeper0
-    image: hyperledger/fabric-zookeeper:x86_64-1.0.2
+    image: hyperledger/fabric-zookeeper:x86_64-1.0.6
     networks:
       hyperledger-ov:
         aliases:
@@ -29,7 +29,7 @@ services:
         delay: 5s
         max_attempts: 3
     hostname: zookeeper1
-    image: hyperledger/fabric-zookeeper:x86_64-1.0.2
+    image: hyperledger/fabric-zookeeper:x86_64-1.0.6
     networks:
       hyperledger-ov:
         aliases:
@@ -46,7 +46,7 @@ services:
         delay: 5s
         max_attempts: 3
     hostname: zookeeper2
-    image: hyperledger/fabric-zookeeper:x86_64-1.0.2
+    image: hyperledger/fabric-zookeeper:x86_64-1.0.6
     networks:
       hyperledger-ov:
         aliases:

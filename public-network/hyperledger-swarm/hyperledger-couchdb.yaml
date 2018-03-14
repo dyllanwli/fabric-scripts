@@ -12,7 +12,7 @@ services:
         delay: 5s
         max_attempts: 3
     hostname: couchdb0.qsoft.com
-    image: hyperledger/fabric-couchdb:x86_64-1.0.2
+    image: hyperledger/fabric-couchdb:x86_64-1.0.6
     networks:
       hyperledger-ov:
         aliases:
@@ -25,7 +25,7 @@ services:
         delay: 5s
         max_attempts: 3
     hostname: couchdb1.qsoft.com
-    image: hyperledger/fabric-couchdb:x86_64-1.0.2
+    image: hyperledger/fabric-couchdb:x86_64-1.0.6
     networks:
       hyperledger-ov:
         aliases:

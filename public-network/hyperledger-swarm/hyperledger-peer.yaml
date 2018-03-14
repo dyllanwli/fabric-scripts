@@ -12,7 +12,7 @@ services:
         delay: 5s
         max_attempts: 3
     hostname: peer0.org1.qsoft.com
-    image: hyperledger/fabric-peer:x86_64-1.0.2
+    image: hyperledger/fabric-peer:x86_64-1.0.6
     networks:
       hyperledger-ov:
         aliases:
@@ -50,7 +50,7 @@ services:
         delay: 5s
         max_attempts: 3
     hostname: peer0.org2.qsoft.com
-    image: hyperledger/fabric-peer:x86_64-1.0.2
+    image: hyperledger/fabric-peer:x86_64-1.0.6
     networks:
       hyperledger-ov:
         aliases:
