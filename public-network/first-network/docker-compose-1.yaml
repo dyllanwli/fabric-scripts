@@ -1,28 +1,99 @@
-# Copyright IBM Corp. All Rights Reserved.
-#
-# SPDX-License-Identifier: Apache-2.0
-#
 
-version: '2'
+version: '3'
 
 
-# networks:
-#   byfn:
-
-volumes:
-  orderer.example.com:
-  # peer0.org1.example.com:
-  # peer1.org1.example.com:
-  # peer0.org2.example.com:
-  # peer1.org2.example.com:
+networks:
+  my-net:
 
 services:
 
-  orderer.example.com:
-    extends:
-      file:   base/docker-compose-base.yaml
-      service: orderer.example.com
-    container_name: orderer.example.com
-    # networks:
-      # - byfn
+  ca.example.com:
+    image: hyperledger/fabric-ca:x86_64-1.0.6
+    container_name: ca.example.com
+    environment:
+      - GODEBUG=netdns=go
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.example.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/9696bdf08309c9048d17e8c9386dee8f027f73c3044c8df9ff6e7befde0e6439_sk
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=hyp-net
+    volumes:
+      - ./crypto-config/peerOrganizations/org1.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    ports: 
+      - 7054:7054
+    networks:
+      - my-net
 
+  orderer.example.com:
+    image: hyperledger/fabric-orderer:x86_64-1.0.6
+    container_name: orderer.example.com
+    environment:
+      - GODEBUG=netdns=go
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=my-net
+      - ORDERER_GENERAL_TLS_ENABLED=false
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_LISTENPORT=7050
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_LOGLEVEL=debug
+    volumes:
+      - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp:/var/hyperledger/orderer/msp
+      - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+    ports:
+      - 7050:7050
+    networks:
+      - my-net
+
+  couchdb0:
+    image: hyperledger/fabric-couchdb:x86_64-1.0.6
+    container_name: couchdb0
+    environment:
+      - GODEBUG=netdns=go 
+      - COUCHDB_USER= 
+      - COUCHDB_PASSWORD= 
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=my-net
+    ports:
+      - 5984:5984
+    networks:
+      - my-net
+
+  peer0.org1.example.com:
+    image: hyperledger/fabric-peer:x86_64-1.0.6
+    container_name: peer0.org1.example.com
+    environment:
+      - GODEBUG=netdns=go
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb0:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+      - CORE_PEER_ADDRESSAUTODETECT=true
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_LOGGING_LEVEL=DEBUG
+      - CORE_PEER_NETWORKID=peer0.org1.example.com
+      - CORE_NEXT=true
+      - CORE_PEER_ENDORSER_ENABLED=true
+      - CORE_PEER_ID=peer0.org1.example.com
+      - CORE_PEER_PROFILE_ENABLED=true
+      - CORE_PEER_COMMITTER_LEDGER_ORDERER=orderer.example.com:7050
+      - CORE_PEER_GOSSIP_IGNORESECURITY=true
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=my-net
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.example.com:7051
+      - CORE_PEER_TLS_ENABLED=false
+      - CORE_PEER_GOSSIP_USELEADERELECTION=false
+      - CORE_PEER_GOSSIP_ORGLEADER=true 
+      - CORE_PEER_LOCALMSPID=Org1MSP
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp:/etc/hyperledger/fabric/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: peer node start
+    links:
+      - orderer.example.com:orderer.example.com
+    ports:
+      - 8051:7051
+      - 8053:7053
+    networks:
+      - my-net
