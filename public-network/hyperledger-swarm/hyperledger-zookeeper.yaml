@@ -18,6 +18,7 @@ services:
         aliases:
         - zookeeper0.qsoft.com
     environment:
+    - GODEBUG=netdns=go
     - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=hyperledger-ov
     - ZOO_MY_ID=1
     - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
@@ -35,6 +36,7 @@ services:
         aliases:
         - zookeeper1.qsoft.com
     environment:
+    - GODEBUG=netdns=go
     - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=hyperledger-ov
     - ZOO_MY_ID=2
     - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
@@ -52,6 +54,7 @@ services:
         aliases:
         - zookeeper2.qsoft.com
     environment:
+    - GODEBUG=netdns=go
     - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=hyperledger-ov
     - ZOO_MY_ID=3
     - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
