@@ -121,10 +121,11 @@ func GenService(dockerCompose *DockerCompose, domainName string, serviceName str
 				zookeeperArray = append(zookeeperArray, "server."+strconv.Itoa(j+1)+"=zookeeper"+strconv.Itoa(j)+":2888:3888")
 			}
 			zookeeperList := arrayToString(zookeeperArray, " ")
-			service.Environment = make([]string, 3)
+			service.Environment = make([]string, 4)
 			service.Environment[0] = "CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=" + networkName
 			service.Environment[1] = "ZOO_MY_ID=" + strconv.Itoa(i+1)
 			service.Environment[2] = "ZOO_SERVERS=" + zookeeperList
+			service.Environment[3] = "GODEBUG=netdns=go"
 			err := GenDeploy(service)
 			check(err)
 
@@ -143,7 +144,7 @@ func GenService(dockerCompose *DockerCompose, domainName string, serviceName str
 				zookeeperArray = append(zookeeperArray, "zookeeper"+strconv.Itoa(j)+":2181")
 			}
 			zookeeperString := arrayToString(zookeeperArray, ",")
-			service.Environment = make([]string, 8)
+			service.Environment = make([]string, 10)
 			service.Environment[0] = "CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=" + networkName
 			service.Environment[1] = "KAFKA_MESSAGE_MAX_BYTES=103809024"       // 99 MB
 			service.Environment[2] = "KAFKA_REPLICA_FETCH_MAX_BYTES=103809024" // 99 MB
@@ -152,6 +153,7 @@ func GenService(dockerCompose *DockerCompose, domainName string, serviceName str
 			service.Environment[5] = "KAFKA_MIN_INSYNC_REPLICAS=2"
 			service.Environment[6] = "KAFKA_ZOOKEEPER_CONNECT=" + zookeeperString
 			service.Environment[7] = "KAFKA_BROKER_ID=" + strconv.Itoa(i)
+			service.Environment[9] = "GODEBUG=netdns=go"
 			err := GenDeploy(service)
 			check(err)
 
@@ -165,7 +167,7 @@ func GenService(dockerCompose *DockerCompose, domainName string, serviceName str
 				Aliases: []string{serviceHost + "." + domainName},
 			}
 			service.Image = "hyperledger/fabric-orderer" + TAG
-			service.Environment = make([]string, 14)
+			service.Environment = make([]string, 15)
 			service.Environment[0] = "CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=" + networkName
 			service.Environment[1] = "ORDERER_GENERAL_LOGLEVEL=debug"
 			service.Environment[2] = "ORDERER_GENERAL_LISTENADDRESS=0.0.0.0"
@@ -180,7 +182,7 @@ func GenService(dockerCompose *DockerCompose, domainName string, serviceName str
 			service.Environment[11] = "ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s"
 			service.Environment[12] = "ORDERER_KAFAK_RETRY_SHORTTOTAL=30s"
 			service.Environment[13] = "ORDERER_KAFKA_VERBOSE=true"
-
+			service.Environment[14] = "GODEBUG=netdns=go"
 			service.WorkingDir = "/opt/gopath/src/github.com/hyperledger/fabric"
 			service.Command = "orderer"
 
@@ -202,12 +204,13 @@ func GenService(dockerCompose *DockerCompose, domainName string, serviceName str
 				Aliases: []string{serviceName + "_peerOrg" + orgId},
 			}
 			service.Image = "hyperledger/fabric-ca" + TAG
-			service.Environment = make([]string, 5)
+			service.Environment = make([]string, 6)
 			service.Environment[0] = "FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server"
 			service.Environment[1] = "FABRIC_CA_SERVER_CA_NAME=ca-org" + orgId
 			service.Environment[2] = "FABRIC_CA_SERVER_TLS_ENABLED=true"
 			service.Environment[3] = "FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org" + orgId + "." + domainName + "-cert.pem"
 			service.Environment[4] = "FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/CA" + orgId + "_PRIVATE_KEY"
+			service.Environment[5] = "GODEBUG=netdns=go"
 			service.Command = "sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org" + orgId + "." + domainName + "-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/CA" + orgId + "_PRIVATE_KEY -b admin:adminpw -d'"
 			service.Volumes = make([]string, 1)
 			service.Volumes[0] = "./crypto-config/peerOrganizations/org" + orgId + "." + domainName + "/ca/:/etc/hyperledger/fabric-ca-server-config"
@@ -240,7 +243,7 @@ func GenService(dockerCompose *DockerCompose, domainName string, serviceName str
 			service.Networks[networkName] = &ServNet{
 				Aliases: []string{hostName},
 			}
-			service.Environment = make([]string, 17)
+			service.Environment = make([]string, 18)
 			service.Environment[0] = "CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock"
 			service.Environment[1] = "CORE_LOGGING_LEVEL=DEBUG"
 			service.Environment[2] = "CORE_PEER_TLS_ENABLED=true"
@@ -258,6 +261,7 @@ func GenService(dockerCompose *DockerCompose, domainName string, serviceName str
 			service.Environment[14] = "CORE_LEDGER_STATE_STATEDATABASE=CouchDB"
 			service.Environment[15] = "CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb" + strconv.Itoa(i) + ":5984"
 			service.Environment[16] = "CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org" + orgNum + "." + domainName + ":7051"
+			service.Environment[17] = "GODEBUG=netdns=go"
 			//service.Environment[3]  = "CORE_PEER_ENDORSER_ENABLED=true"
 			//service.Environment[6]  = "CORE_PEER_GOSSIP_SKIPHANDSHAKE=true"
 			service.WorkingDir = "/opt/gopath/src/github.com/hyperledger/fabric/peer"
@@ -277,7 +281,7 @@ func GenService(dockerCompose *DockerCompose, domainName string, serviceName str
 			service.Networks[networkName] = &ServNet{
 				Aliases: []string{"cli"},
 			}
-			service.Environment = make([]string, 12)
+			service.Environment = make([]string, 13)
 			service.Environment[0] = "CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=" + networkName
 			service.Environment[1] = "GOPATH=/opt/gopath"
 			service.Environment[2] = "CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock"
@@ -290,6 +294,7 @@ func GenService(dockerCompose *DockerCompose, domainName string, serviceName str
 			service.Environment[9] = "CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1." + domainName + "/peers/peer0.org1." + domainName + "/tls/server.key"
 			service.Environment[10] = "CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1." + domainName + "/peers/peer0.org1." + domainName + "/tls/ca.crt"
 			service.Environment[11] = "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1." + domainName + "/users/Admin@org1." + domainName + "/msp"
+			service.Environment[12] = "GODEBUG=netdns=go"
 			service.WorkingDir = "/opt/gopath/src/github.com/hyperledger/fabric/peer"
 			service.Command = "sleep 3600"
 			service.Volumes = make([]string, 5)
