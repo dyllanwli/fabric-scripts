@@ -18,10 +18,10 @@ func main() {
 
 	flag.StringVar(&domain, "domain", "example.com", "default example.com")
 	flag.IntVar(&numOrgs, "org", 2, "orgs default 2")
-	flag.IntVar(&numPeer, "peer", 4, "peers default 4")
-	flag.IntVar(&numOrderer, "orderer", 1, "orderer default 1")
-	flag.IntVar(&numKafka, "kafka", 3, "kafka default 3")
-	flag.IntVar(&numZookeeper, "zk", 3, "zookeeper default 3")
+	flag.IntVar(&numPeer, "peer", 2, "peers default 2")
+	flag.IntVar(&numOrderer, "orderer", 3, "orderer default 3")
+	flag.IntVar(&numKafka, "kafka", 0, "kafka default 0")
+	flag.IntVar(&numZookeeper, "zk", 0, "zookeeper default 0")
 
 	flag.Parse()
 

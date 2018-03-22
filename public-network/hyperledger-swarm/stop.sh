@@ -5,3 +5,4 @@ docker stack rm hyperledger-couchdb
 docker stack rm hyperledger-peer
 docker stack rm hyperledger-ca
 docker stack rm hyperledger-cli
+docker rm -f $(docker ps -aq)
